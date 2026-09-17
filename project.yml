@@ -1,0 +1,65 @@
+name: QLYAML
+options:
+  bundleIdPrefix: com.2b3pro.qlyaml
+  deploymentTarget:
+    macOS: "13.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MACOSX_DEPLOYMENT_TARGET: "13.0"
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGNING_REQUIRED: "NO"
+    CODE_SIGNING_ALLOWED: "YES"
+    DEVELOPMENT_TEAM: ""
+
+targets:
+  YAMLPreviewExtension:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: YAMLPreviewExtension
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_NAME: YAMLPreviewExtension
+        PRODUCT_BUNDLE_IDENTIFIER: com.2b3pro.qlyaml.preview
+        INFOPLIST_FILE: YAMLPreviewExtension/Info.plist
+        CODE_SIGN_ENTITLEMENTS: YAMLPreviewExtension/YAMLPreviewExtension.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+        SKIP_INSTALL: YES
+
+  YAMLThumbnailExtension:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: YAMLThumbnailExtension
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_NAME: YAMLThumbnailExtension
+        PRODUCT_BUNDLE_IDENTIFIER: com.2b3pro.qlyaml.thumbnail
+        INFOPLIST_FILE: YAMLThumbnailExtension/Info.plist
+        CODE_SIGN_ENTITLEMENTS: YAMLThumbnailExtension/YAMLThumbnailExtension.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+        SKIP_INSTALL: YES
+
+  YAMLQuickLook:
+    type: application
+    platform: macOS
+    sources:
+      - path: QLYAMLHost
+      - path: Shared
+    dependencies:
+      - target: YAMLPreviewExtension
+        embed: true
+      - target: YAMLThumbnailExtension
+        embed: true
+    settings:
+      base:
+        PRODUCT_NAME: "YAML QuickLook"
+        PRODUCT_BUNDLE_IDENTIFIER: com.2b3pro.qlyaml
+        INFOPLIST_FILE: QLYAMLHost/Info.plist
+        CODE_SIGN_ENTITLEMENTS: QLYAMLHost/QLYAMLHost.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon

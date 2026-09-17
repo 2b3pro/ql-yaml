@@ -1,0 +1,28 @@
+# Xcode
+.DS_Store
+*/.DS_Store
+build/
+DerivedData/
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+
+# User data
+xcuserdata/
+*.xcuserdata
+project.xcworkspace/xcuserdata/
+
+# Swift Package Manager
+.build/
+Packages/
+
+# App & Bundles (build outputs)
+*.app
+*.appex
+*.dSYM/
+
+# Temporary / Scratch
+/tmp/
+*.swp
+*~
+*.orig
