@@ -10,36 +10,22 @@
 		02FF09D8DD45DD2A3902BA10 /* YAMLTokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4946679E6DE8F183757F3B /* YAMLTokenizer.swift */; };
 		1C2DCF4BE296B99FF40BCC1E /* YAMLPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9623BED09B169AE30DCDEF7 /* YAMLPreferences.swift */; };
 		3E7F1AEC2C7EA9CF4854F6FB /* YAMLPreviewExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 984F523DAEB722CC34044ECF /* YAMLPreviewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		42A7DD089871747D9740036A /* YAMLThumbnailExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 591D4D46431937DA4EF7D8F5 /* YAMLThumbnailExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		522A6D151F88379FE9C40C15 /* SampleYAML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F4D07F1F418C5781CA7F9 /* SampleYAML.swift */; };
-		5539D5D4A4CC5DC0A53A0AD8 /* YAMLTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9785BE844272B6FBFADA6528 /* YAMLTheme.swift */; };
-		5602D28F44E6C12D6C3D1B76 /* YAMLPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9623BED09B169AE30DCDEF7 /* YAMLPreferences.swift */; };
 		587D353D5218B89A5EE3E325 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5992D765E9023A85DE46C0 /* ContentView.swift */; };
 		8C8270DC4C81A7991D486865 /* YAMLWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174ECACB40A00A1C138A39C1 /* YAMLWebView.swift */; };
-		99A72086D03CB27E5C889B87 /* YAMLHTMLRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9817A2B2CEAA4679302BCC /* YAMLHTMLRenderer.swift */; };
 		9DDD307A81E1BDB95CD92276 /* YAMLPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9623BED09B169AE30DCDEF7 /* YAMLPreferences.swift */; };
 		9F10A876F206E3CC21586914 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7710FF72EDC7E2F93E4537 /* PreviewProvider.swift */; };
 		A62A8FAA223F8A196031714C /* YAMLTokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4946679E6DE8F183757F3B /* YAMLTokenizer.swift */; };
 		B3EE6BBD899CC3870D9891F7 /* YAMLHTMLRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9817A2B2CEAA4679302BCC /* YAMLHTMLRenderer.swift */; };
 		BB0C6D96D8D1E556FEA341E9 /* YAMLHTMLRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9817A2B2CEAA4679302BCC /* YAMLHTMLRenderer.swift */; };
-		BB41AE9503DF86E1CAAC5743 /* ThumbnailProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B2A766AC05353AF9DDAF8 /* ThumbnailProvider.swift */; };
 		C1C3E37D7741D5E3BE677584 /* YAMLTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9785BE844272B6FBFADA6528 /* YAMLTheme.swift */; };
 		C1DF3F5EACEB8A3DD43C940E /* YAMLValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4C4FDF6C38D315F8678C33 /* YAMLValidator.swift */; };
 		C7F1412E66D3B20C76F1C1BC /* YAMLValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4C4FDF6C38D315F8678C33 /* YAMLValidator.swift */; };
 		DE3D2AD66C01A8B63CD6CD2F /* QLYAMLHostApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7648D2EF456683453BB9E5 /* QLYAMLHostApp.swift */; };
 		EBB03C9FC0C071F25EA1615E /* YAMLTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9785BE844272B6FBFADA6528 /* YAMLTheme.swift */; };
-		F670D5818229F018C04984FE /* YAMLValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4C4FDF6C38D315F8678C33 /* YAMLValidator.swift */; };
-		F946D4F615A88C33D2F00114 /* YAMLTokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4946679E6DE8F183757F3B /* YAMLTokenizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		693AC3D026091CAB96A470EB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3AF624D36FF6E4FB7B839F87 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 29E3D8C012FE4AD53A7F0E80;
-			remoteInfo = YAMLThumbnailExtension;
-		};
 		B8C9FE91903C53944E78E5CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3AF624D36FF6E4FB7B839F87 /* Project object */;
@@ -57,7 +43,6 @@
 			dstSubfolderSpec = 13;
 			files = (
 				3E7F1AEC2C7EA9CF4854F6FB /* YAMLPreviewExtension.appex in Embed Foundation Extensions */,
-				42A7DD089871747D9740036A /* YAMLThumbnailExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,15 +50,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		159B2A766AC05353AF9DDAF8 /* ThumbnailProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailProvider.swift; sourceTree = "<group>"; };
 		174ECACB40A00A1C138A39C1 /* YAMLWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAMLWebView.swift; sourceTree = "<group>"; };
 		2471C95F896521542B61E2C3 /* QLYAMLHost.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QLYAMLHost.entitlements; sourceTree = "<group>"; };
 		2D7648D2EF456683453BB9E5 /* QLYAMLHostApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLYAMLHostApp.swift; sourceTree = "<group>"; };
 		42BF47D2054BBCA5413095BA /* YAMLPreviewExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YAMLPreviewExtension.entitlements; sourceTree = "<group>"; };
 		515B92C0E928155919D795D8 /* YAMLQuickLook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YAMLQuickLook.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		591D4D46431937DA4EF7D8F5 /* YAMLThumbnailExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YAMLThumbnailExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D0F4D07F1F418C5781CA7F9 /* SampleYAML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleYAML.swift; sourceTree = "<group>"; };
-		66B8114626A83FB053DCE37B /* YAMLThumbnailExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YAMLThumbnailExtension.entitlements; sourceTree = "<group>"; };
 		6C471FF1BC29B8C4334DFC7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7B5992D765E9023A85DE46C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9785BE844272B6FBFADA6528 /* YAMLTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAMLTheme.swift; sourceTree = "<group>"; };
@@ -83,7 +65,6 @@
 		BC4946679E6DE8F183757F3B /* YAMLTokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAMLTokenizer.swift; sourceTree = "<group>"; };
 		C9623BED09B169AE30DCDEF7 /* YAMLPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAMLPreferences.swift; sourceTree = "<group>"; };
 		DC9817A2B2CEAA4679302BCC /* YAMLHTMLRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAMLHTMLRenderer.swift; sourceTree = "<group>"; };
-		E8C4BD401FDF3701DD5E368F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FF7710FF72EDC7E2F93E4537 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +110,6 @@
 				23CBAAAF1EE498FBA434F9D7 /* QLYAMLHost */,
 				5079BA0922DA424FDE3C8A64 /* Shared */,
 				1B14737B9313D59400F4A6D1 /* YAMLPreviewExtension */,
-				D7B05A6273286B44E56435E1 /* YAMLThumbnailExtension */,
 				BFE397471CFD11916F67E794 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -139,19 +119,8 @@
 			children = (
 				984F523DAEB722CC34044ECF /* YAMLPreviewExtension.appex */,
 				515B92C0E928155919D795D8 /* YAMLQuickLook.app */,
-				591D4D46431937DA4EF7D8F5 /* YAMLThumbnailExtension.appex */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D7B05A6273286B44E56435E1 /* YAMLThumbnailExtension */ = {
-			isa = PBXGroup;
-			children = (
-				E8C4BD401FDF3701DD5E368F /* Info.plist */,
-				159B2A766AC05353AF9DDAF8 /* ThumbnailProvider.swift */,
-				66B8114626A83FB053DCE37B /* YAMLThumbnailExtension.entitlements */,
-			);
-			path = YAMLThumbnailExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,7 +137,6 @@
 			);
 			dependencies = (
 				CCAD97642A12369C581225CF /* PBXTargetDependency */,
-				515370B8D69BE9B2A854DE39 /* PBXTargetDependency */,
 			);
 			name = YAMLQuickLook;
 			packageProductDependencies = (
@@ -176,23 +144,6 @@
 			productName = YAMLQuickLook;
 			productReference = 515B92C0E928155919D795D8 /* YAMLQuickLook.app */;
 			productType = "com.apple.product-type.application";
-		};
-		29E3D8C012FE4AD53A7F0E80 /* YAMLThumbnailExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C98338869783AE214D68601E /* Build configuration list for PBXNativeTarget "YAMLThumbnailExtension" */;
-			buildPhases = (
-				6384181D8F01DC6643F96182 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = YAMLThumbnailExtension;
-			packageProductDependencies = (
-			);
-			productName = YAMLThumbnailExtension;
-			productReference = 591D4D46431937DA4EF7D8F5 /* YAMLThumbnailExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 		66029D0C851357D6B221A5F6 /* YAMLPreviewExtension */ = {
 			isa = PBXNativeTarget;
@@ -223,9 +174,6 @@
 					197C10E9E887469065D1CBED = {
 						DevelopmentTeam = "";
 					};
-					29E3D8C012FE4AD53A7F0E80 = {
-						DevelopmentTeam = "";
-					};
 					66029D0C851357D6B221A5F6 = {
 						DevelopmentTeam = "";
 					};
@@ -246,7 +194,6 @@
 			projectRoot = "";
 			targets = (
 				66029D0C851357D6B221A5F6 /* YAMLPreviewExtension */,
-				29E3D8C012FE4AD53A7F0E80 /* YAMLThumbnailExtension */,
 				197C10E9E887469065D1CBED /* YAMLQuickLook */,
 			);
 		};
@@ -269,19 +216,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6384181D8F01DC6643F96182 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BB41AE9503DF86E1CAAC5743 /* ThumbnailProvider.swift in Sources */,
-				99A72086D03CB27E5C889B87 /* YAMLHTMLRenderer.swift in Sources */,
-				5602D28F44E6C12D6C3D1B76 /* YAMLPreferences.swift in Sources */,
-				5539D5D4A4CC5DC0A53A0AD8 /* YAMLTheme.swift in Sources */,
-				F946D4F615A88C33D2F00114 /* YAMLTokenizer.swift in Sources */,
-				F670D5818229F018C04984FE /* YAMLValidator.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9D662639F68ABB08EF945664 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -298,11 +232,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		515370B8D69BE9B2A854DE39 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 29E3D8C012FE4AD53A7F0E80 /* YAMLThumbnailExtension */;
-			targetProxy = 693AC3D026091CAB96A470EB /* PBXContainerItemProxy */;
-		};
 		CCAD97642A12369C581225CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 66029D0C851357D6B221A5F6 /* YAMLPreviewExtension */;
@@ -311,25 +240,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		143F10DAAEA6A3F7E7423660 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = YAMLThumbnailExtension/YAMLThumbnailExtension.entitlements;
-				COMBINE_HIDPI_IMAGES = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = YAMLThumbnailExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.2b3pro.qlyaml.thumbnail;
-				PRODUCT_NAME = YAMLThumbnailExtension;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
 		38391B67F25F6A2B0E792123 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -513,25 +423,6 @@
 			};
 			name = Release;
 		};
-		F80FEFAEAA4EF666C340B223 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = YAMLThumbnailExtension/YAMLThumbnailExtension.entitlements;
-				COMBINE_HIDPI_IMAGES = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = YAMLThumbnailExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.2b3pro.qlyaml.thumbnail;
-				PRODUCT_NAME = YAMLThumbnailExtension;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 		FFA621AF0CD6C011B7400C72 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -576,15 +467,6 @@
 			buildConfigurations = (
 				38391B67F25F6A2B0E792123 /* Debug */,
 				4797269D39D2303C119A94A5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		C98338869783AE214D68601E /* Build configuration list for PBXNativeTarget "YAMLThumbnailExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				143F10DAAEA6A3F7E7423660 /* Debug */,
-				F80FEFAEAA4EF666C340B223 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

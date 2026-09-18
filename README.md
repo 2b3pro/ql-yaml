@@ -1,17 +1,17 @@
-# YAML QuickLook & Thumbnail Extension for macOS
+# YAML QuickLook Extension for macOS
 
-A modern, fast, and feature-rich macOS Quick Look Preview and Thumbnail Extension for viewing `.yaml` and `.yml` files in **DEVONthink** and **Finder**.
+A modern, fast, and feature-rich macOS Quick Look Preview Extension for viewing `.yaml` and `.yml` files in **DEVONthink** and **Finder**.
 
-Built natively with Swift and modern App Extension APIs (`com.apple.quicklook.preview` and `com.apple.quicklook.thumbnail`).
+Built natively with Swift and modern App Extension APIs (`com.apple.quicklook.preview`).
 
 ---
 
 ## Key Features
 
 - **Full DEVONthink & Finder Integration**:
-  - Automatically renders in **DEVONthink**'s preview and inspector panes via `QLPreviewView`.
-  - Full-screen Quick Look in DEVONthink and Finder (press <kbd>Space</kbd>).
-  - Rich file thumbnails in Finder icon, list, column, and gallery views.
+  - **Finder Selection / Preview Pane**: Automatically displays a native, scrollable raw text view in Finder's column view and Inspector pane (just like Markdown and source code files).
+  - **Full-Screen Quick Look**: Press <kbd>Space</kbd> in Finder or DEVONthink for rich syntax highlighting, code folding, dark mode, and soft wrap toggle.
+  - **DEVONthink**: Renders directly inside DEVONthink's preview and inspector panes via `QLPreviewView`.
 - **Soft Line Wrapping (Raw & Highlighted Mode)**:
   - Toggle soft wrapping with a single click using the **Wrap: On / Wrap: Off** toolbar button.
   - In **Raw mode**, long lines wrap smoothly to avoid horizontal scrolling.
@@ -45,8 +45,7 @@ Built natively with Swift and modern App Extension APIs (`com.apple.quicklook.pr
 The project consists of:
 1. **`YAML QuickLook.app`**: The companion macOS application used for live previewing YAML files, adjusting preferences, and registering extensions with macOS.
 2. **`YAMLPreviewExtension.appex`**: Modern Quick Look Preview Extension conforming to `QLPreviewProvider` and `QLPreviewingController`.
-3. **`YAMLThumbnailExtension.appex`**: Modern Quick Look Thumbnail Extension conforming to `QLThumbnailProvider`.
-4. **`Shared/`**:
+3. **`Shared/`**:
    - `YAMLTokenizer.swift`: Fast, streaming YAML tokenizer and fold range calculator.
    - `YAMLValidator.swift`: Syntactic checks for tabs, unclosed quotes, and duplicate keys.
    - `YAMLHTMLRenderer.swift`: Self-contained HTML/CSS/JS generator with zero external network dependencies.
@@ -79,12 +78,11 @@ The project consists of:
 If macOS does not automatically enable the extension:
 1. Open **System Settings** > **General** > **Login Items & Extensions**.
 2. Scroll down to the **Quick Look** section.
-3. Ensure **YAML Previewer** and **YAML Thumbnailer** are toggled **ON**.
+3. Ensure **YAML Previewer** is toggled **ON**.
 
 Alternatively, run:
 ```bash
 pluginkit -e use -i com.2b3pro.qlyaml.preview
-pluginkit -e use -i com.2b3pro.qlyaml.thumbnail
 qlmanage -r && qlmanage -r cache
 ```
 

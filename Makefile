@@ -36,10 +36,9 @@ install:
 
 register:
 	@echo "🔌 Registering Quick Look extensions with pluginkit..."
+	@pluginkit -r com.2b3pro.qlyaml.thumbnail 2>/dev/null || true
 	@pluginkit -a "$(DEST_APP)/Contents/PlugIns/YAMLPreviewExtension.appex"
-	@pluginkit -a "$(DEST_APP)/Contents/PlugIns/YAMLThumbnailExtension.appex"
 	@pluginkit -e use -i com.2b3pro.qlyaml.preview
-	@pluginkit -e use -i com.2b3pro.qlyaml.thumbnail
 	@echo "✅ Registered extensions:"
 	@pluginkit -m -v | grep -i 2b3pro
 
@@ -47,7 +46,8 @@ restart-ql:
 	@echo "🔄 Resetting macOS QuickLook daemon and caches..."
 	@qlmanage -r
 	@qlmanage -r cache
-	@echo "✅ QuickLook daemon cache refreshed!"
+	@killall Finder 2>/dev/null || true
+	@echo "✅ QuickLook daemon cache and Finder refreshed!"
 
 clean:
 	@rm -rf $(BUILD_DIR)

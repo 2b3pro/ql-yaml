@@ -29,21 +29,6 @@ targets:
         GENERATE_INFOPLIST_FILE: NO
         SKIP_INSTALL: YES
 
-  YAMLThumbnailExtension:
-    type: app-extension
-    platform: macOS
-    sources:
-      - path: YAMLThumbnailExtension
-      - path: Shared
-    settings:
-      base:
-        PRODUCT_NAME: YAMLThumbnailExtension
-        PRODUCT_BUNDLE_IDENTIFIER: com.2b3pro.qlyaml.thumbnail
-        INFOPLIST_FILE: YAMLThumbnailExtension/Info.plist
-        CODE_SIGN_ENTITLEMENTS: YAMLThumbnailExtension/YAMLThumbnailExtension.entitlements
-        GENERATE_INFOPLIST_FILE: NO
-        SKIP_INSTALL: YES
-
   YAMLQuickLook:
     type: application
     platform: macOS
@@ -52,8 +37,6 @@ targets:
       - path: Shared
     dependencies:
       - target: YAMLPreviewExtension
-        embed: true
-      - target: YAMLThumbnailExtension
         embed: true
     settings:
       base:
