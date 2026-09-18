@@ -89,6 +89,18 @@ The project consists of:
 
 ---
 
+## Support
+
+YAML QuickLook is free and open source. If it saves you time viewing YAML files on macOS, consider buying me a coffee and croissant! It helps keep the updates coming.
+
+<a href="https://paypal.me/2b3/5">
+  <img src="https://img.shields.io/badge/Donate-PayPal-blue.svg" alt="Donate with PayPal" />
+</a>
+
+**[Buy me a cup of coffee and croissant!](https://paypal.me/2b3/10)**
+
+---
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
