@@ -25,7 +25,8 @@ install:
 	@echo "📦 Installing $(APP_NAME) to /Applications..."
 	@mkdir -p /Applications
 	@rm -rf "$(DEST_APP)"
-	@BUILT_APP=$$(xcodebuild -project $(PROJECT_NAME).xcodeproj -scheme $(SCHEME) -configuration $(CONFIG) -showBuildSettings 2>/dev/null | awk -F ' = ' '/TARGET_BUILD_DIR/ {print $$2}' | tr -d '\r')/$(APP_NAME); \
+	@TARGET_DIR=$$(xcodebuild -project $(PROJECT_NAME).xcodeproj -scheme $(SCHEME) -configuration $(CONFIG) -showBuildSettings 2>/dev/null | awk -F ' = ' '/TARGET_BUILD_DIR/ {print $$2}' | tr -d '\r'); \
+	BUILT_APP="$$TARGET_DIR/$(APP_NAME)"; \
 	if [ -d "$$BUILT_APP" ]; then \
 		cp -R "$$BUILT_APP" /Applications/; \
 		echo "✅ Installed from $$BUILT_APP to /Applications/"; \

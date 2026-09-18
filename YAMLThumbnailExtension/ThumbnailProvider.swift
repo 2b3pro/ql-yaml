@@ -15,127 +15,142 @@ public class ThumbnailProvider: QLThumbnailProvider {
         
         var sampleLines: [String] = []
         if let data = try? Data(contentsOf: fileURL, options: .mappedIfSafe),
-           let text = String(data: data.prefix(4096), encoding: .utf8) {
+           let text = String(data: data.prefix(8192), encoding: .utf8) ?? String(data: data.prefix(8192), encoding: .isoLatin1) {
             sampleLines = text.components(separatedBy: .newlines).filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
         }
         
-        let reply = QLThumbnailReply(contextSize: size) { (context: CGContext) -> Bool in
-            let rect = CGRect(origin: .zero, size: size)
+        let reply = QLThumbnailReply(contextSize: size) { () -> Bool in
+            let rect = NSRect(origin: .zero, size: size)
             
-            // Draw page background
-            let padding: CGFloat = size.width * 0.08
-            let pageRect = rect.insetBy(dx: padding, dy: padding)
-            let cornerRadius: CGFloat = max(4, pageRect.width * 0.06)
+            // 1. Fill entire canvas edge-to-edge
+            NSColor.white.setFill()
+            rect.fill()
             
-            context.saveGState()
+            // 2. Header Bar
+            let headerHeight = max(24.0, min(38.0, size.height * 0.09))
+            let headerRect = NSRect(x: 0, y: size.height - headerHeight, width: size.width, height: headerHeight)
+            NSColor(red: 0.96, green: 0.97, blue: 0.99, alpha: 1.0).setFill()
+            headerRect.fill()
             
-            // Subtle document drop shadow
-            context.setShadow(offset: CGSize(width: 0, height: -pageRect.height * 0.03), blur: pageRect.width * 0.08, color: NSColor.black.withAlphaComponent(0.2).cgColor)
+            // Header bottom border
+            NSColor(red: 0.88, green: 0.90, blue: 0.94, alpha: 1.0).setFill()
+            NSRect(x: 0, y: size.height - headerHeight, width: size.width, height: 1.0).fill()
             
-            // White document card
-            let path = CGPath(roundedRect: pageRect, cornerWidth: cornerRadius, cornerHeight: cornerRadius, transform: nil)
-            context.setFillColor(NSColor.white.cgColor)
-            context.addPath(path)
-            context.fillPath()
-            
-            context.restoreGState()
-            
-            // Border
-            context.saveGState()
-            context.addPath(path)
-            context.setStrokeColor(NSColor(white: 0.85, alpha: 1.0).cgColor)
-            context.setLineWidth(max(1, size.width * 0.005))
-            context.strokePath()
-            context.restoreGState()
-            
-            // Top Bar with YAML Badge
-            let topBarHeight: CGFloat = pageRect.height * 0.16
-            let badgeRect = CGRect(
-                x: pageRect.maxX - pageRect.width * 0.35,
-                y: pageRect.maxY - topBarHeight * 0.85,
-                width: pageRect.width * 0.28,
-                height: topBarHeight * 0.65
+            // YAML Badge in header right
+            let badgeHeight = max(14.0, headerHeight * 0.65)
+            let badgeWidth = badgeHeight * 2.3
+            let badgePadding = max(8.0, headerHeight * 0.3)
+            let badgeRect = NSRect(
+                x: size.width - badgeWidth - badgePadding,
+                y: size.height - headerHeight + (headerHeight - badgeHeight) / 2,
+                width: badgeWidth,
+                height: badgeHeight
             )
-            let badgePath = CGPath(roundedRect: badgeRect, cornerWidth: badgeRect.height * 0.3, cornerHeight: badgeRect.height * 0.3, transform: nil)
-            context.setFillColor(NSColor(red: 0.1, green: 0.5, blue: 0.9, alpha: 1.0).cgColor)
-            context.addPath(badgePath)
-            context.fillPath()
+            let badgePath = NSBezierPath(roundedRect: badgeRect, xRadius: badgeHeight * 0.3, yRadius: badgeHeight * 0.3)
+            NSColor(red: 0.10, green: 0.52, blue: 0.95, alpha: 1.0).setFill()
+            badgePath.fill()
             
-            // Draw "YAML" text in badge
-            let badgeAttrs: [NSAttributedString.Key: Any] = [
-                .font: NSFont.boldSystemFont(ofSize: max(8, badgeRect.height * 0.55)),
+            let badgeText = NSAttributedString(string: "YAML", attributes: [
+                .font: NSFont.boldSystemFont(ofSize: max(7, badgeHeight * 0.55)),
                 .foregroundColor: NSColor.white
-            ]
-            let badgeText = NSAttributedString(string: "YAML", attributes: badgeAttrs)
-            let textSize = badgeText.size()
-            let textPoint = CGPoint(
-                x: badgeRect.midX - textSize.width / 2,
-                y: badgeRect.midY - textSize.height / 2
-            )
+            ])
+            let bTextSize = badgeText.size()
+            badgeText.draw(at: CGPoint(
+                x: badgeRect.midX - bTextSize.width / 2,
+                y: badgeRect.midY - bTextSize.height / 2
+            ))
             
-            NSGraphicsContext.saveGraphicsState()
-            let nsContext = NSGraphicsContext(cgContext: context, flipped: false)
-            NSGraphicsContext.current = nsContext
-            badgeText.draw(at: textPoint)
+            // Document Title in header left
+            let docTitle = NSAttributedString(string: fileURL.lastPathComponent, attributes: [
+                .font: NSFont.systemFont(ofSize: max(8, headerHeight * 0.42), weight: .semibold),
+                .foregroundColor: NSColor(white: 0.3, alpha: 1.0)
+            ])
+            docTitle.draw(at: CGPoint(
+                x: max(10, headerHeight * 0.4),
+                y: size.height - headerHeight + (headerHeight - docTitle.size().height) / 2
+            ))
             
-            // Draw Code Lines
-            let contentTop = pageRect.maxY - topBarHeight - pageRect.height * 0.05
-            let contentLeft = pageRect.minX + pageRect.width * 0.08
-            let contentWidth = pageRect.width * 0.84
-            let contentBottom = pageRect.minY + pageRect.height * 0.08
+            // 3. Line numbers gutter and content area
+            let contentTop = size.height - headerHeight - 8
+            let contentBottom: CGFloat = 8
             let availableHeight = contentTop - contentBottom
             
-            let numLines = min(sampleLines.count > 0 ? sampleLines.count : 10, 14)
-            let lineSpacing = availableHeight / CGFloat(max(numLines, 8))
+            let gutterWidth = max(26.0, min(42.0, size.width * 0.085))
+            let gutterRect = NSRect(x: 0, y: 0, width: gutterWidth, height: size.height - headerHeight)
+            NSColor(red: 0.98, green: 0.98, blue: 0.99, alpha: 1.0).setFill()
+            gutterRect.fill()
             
-            if size.width >= 160 && !sampleLines.isEmpty {
-                // Render real miniature text lines
-                let codeFont = NSFont.monospacedSystemFont(ofSize: max(7, lineSpacing * 0.65), weight: .regular)
-                for (i, rawLine) in sampleLines.prefix(numLines).enumerated() {
-                    let y = contentTop - CGFloat(i + 1) * lineSpacing
-                    let lineStr = String(rawLine.prefix(40))
-                    
-                    var color = NSColor(white: 0.2, alpha: 1.0)
-                    if lineStr.contains(":") {
-                        color = NSColor(red: 0.05, green: 0.45, blue: 0.8, alpha: 1.0)
-                    } else if lineStr.hasPrefix("-") {
-                        color = NSColor(red: 0.1, green: 0.6, blue: 0.3, alpha: 1.0)
-                    } else if lineStr.hasPrefix("#") {
-                        color = NSColor(white: 0.6, alpha: 1.0)
-                    }
-                    
-                    let attrStr = NSAttributedString(string: lineStr, attributes: [
-                        .font: codeFont,
-                        .foregroundColor: color
-                    ])
-                    attrStr.draw(at: CGPoint(x: contentLeft, y: y))
+            // Gutter right border
+            NSColor(red: 0.90, green: 0.92, blue: 0.95, alpha: 1.0).setFill()
+            NSRect(x: gutterWidth - 1, y: 0, width: 1, height: size.height - headerHeight).fill()
+            
+            // 4. Determine lines to render and layout
+            let linesToRender = sampleLines.isEmpty ? [
+                "apiVersion: apps/v1",
+                "kind: Deployment",
+                "metadata:",
+                "  name: application",
+                "spec:",
+                "  replicas: 3",
+                "  template:",
+                "    spec:",
+                "      containers:",
+                "      - name: app",
+                "        image: app:latest",
+                "        ports:",
+                "        - containerPort: 80"
+            ] : sampleLines
+            
+            let minLines = 16
+            let maxLines = 32
+            let count = max(minLines, min(linesToRender.count, maxLines))
+            let lineHeight = availableHeight / CGFloat(count)
+            let fontSize = max(7.0, min(12.0, lineHeight * 0.68))
+            let codeFont = NSFont.monospacedSystemFont(ofSize: fontSize, weight: .regular)
+            let boldCodeFont = NSFont.monospacedSystemFont(ofSize: fontSize, weight: .semibold)
+            let gutterFont = NSFont.monospacedSystemFont(ofSize: max(6.5, fontSize * 0.85), weight: .regular)
+            
+            let contentLeft = gutterWidth + 8
+            
+            for (i, rawLine) in linesToRender.prefix(count).enumerated() {
+                let y = contentTop - CGFloat(i + 1) * lineHeight
+                if y < contentBottom { break }
+                
+                // Draw Line Number
+                let lineNumStr = "\(i + 1)"
+                let numAttr = NSAttributedString(string: lineNumStr, attributes: [
+                    .font: gutterFont,
+                    .foregroundColor: NSColor(red: 0.65, green: 0.70, blue: 0.76, alpha: 1.0)
+                ])
+                let numSize = numAttr.size()
+                numAttr.draw(at: CGPoint(x: gutterWidth - numSize.width - 6, y: y + (lineHeight - numSize.height) / 2))
+                
+                // Draw Syntax-Highlighted Line Content
+                let trimmed = rawLine.trimmingCharacters(in: .whitespaces)
+                var color = NSColor(red: 0.15, green: 0.18, blue: 0.22, alpha: 1.0)
+                var font = codeFont
+                
+                if trimmed.hasPrefix("#") {
+                    color = NSColor(red: 0.55, green: 0.60, blue: 0.67, alpha: 1.0)
+                } else if trimmed.hasPrefix("-") {
+                    color = NSColor(red: 0.08, green: 0.55, blue: 0.25, alpha: 1.0)
+                    font = boldCodeFont
+                } else if rawLine.contains(":") {
+                    color = NSColor(red: 0.05, green: 0.45, blue: 0.85, alpha: 1.0)
+                    font = boldCodeFont
                 }
-            } else {
-                // Render stylized colored placeholder bars
-                for i in 0..<numLines {
-                    let y = contentTop - CGFloat(i + 1) * lineSpacing
-                    let indent = (i % 3 == 0) ? 0 : (i % 3 == 1 ? pageRect.width * 0.08 : pageRect.width * 0.16)
-                    let barWidth = max(contentWidth * 0.3, contentWidth * (0.85 - CGFloat(i % 4) * 0.12) - indent)
-                    let barRect = CGRect(x: contentLeft + indent, y: y, width: barWidth, height: max(2, lineSpacing * 0.4))
-                    
-                    let barColor: CGColor
-                    if i % 3 == 0 {
-                        barColor = NSColor(red: 0.1, green: 0.5, blue: 0.85, alpha: 0.8).cgColor
-                    } else if i % 3 == 1 {
-                        barColor = NSColor(red: 0.15, green: 0.65, blue: 0.35, alpha: 0.7).cgColor
-                    } else {
-                        barColor = NSColor(red: 0.9, green: 0.4, blue: 0.2, alpha: 0.7).cgColor
-                    }
-                    
-                    context.setFillColor(barColor)
-                    context.fill(barRect)
-                }
+                
+                let lineAttr = NSAttributedString(string: rawLine, attributes: [
+                    .font: font,
+                    .foregroundColor: color
+                ])
+                lineAttr.draw(at: CGPoint(x: contentLeft, y: y + (lineHeight - fontSize * 1.1) / 2))
             }
             
-            NSGraphicsContext.restoreGraphicsState()
             return true
         }
         
+        reply.extensionBadge = "YAML"
         handler(reply, nil)
     }
 }
