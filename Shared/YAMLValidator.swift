@@ -67,9 +67,19 @@ public final class YAMLValidator {
                 ))
             }
             
+            let isSequenceItem = trimmed.hasPrefix("- ") || trimmed == "-"
+            
             // Clear deeper level keys when indent decreases
             if indent < prevIndent {
                 for key in levelKeys.keys where key > indent {
+                    levelKeys.removeValue(forKey: key)
+                }
+            }
+            
+            // A sequence item marker "-" starts a new element in the list.
+            // Clear tracked keys for this indent level and deeper so sibling items don't collide.
+            if isSequenceItem {
+                for key in levelKeys.keys where key >= indent {
                     levelKeys.removeValue(forKey: key)
                 }
             }
@@ -77,10 +87,11 @@ public final class YAMLValidator {
             
             // Check for duplicate keys at current level
             if let key = extractMappingKey(from: trimmed) {
-                if levelKeys[indent] == nil {
-                    levelKeys[indent] = Set<String>()
+                let keyIndent = isSequenceItem ? indent + 2 : indent
+                if levelKeys[keyIndent] == nil {
+                    levelKeys[keyIndent] = Set<String>()
                 }
-                if levelKeys[indent]?.contains(key) == true {
+                if levelKeys[keyIndent]?.contains(key) == true {
                     diagnostics.append(YAMLDiagnostic(
                         severity: .warning,
                         line: lineNum,
@@ -88,7 +99,12 @@ public final class YAMLValidator {
                         message: "Duplicate key \"\(key)\" at the same indentation level"
                     ))
                 } else {
-                    levelKeys[indent]?.insert(key)
+                    levelKeys[keyIndent]?.insert(key)
+                    if isSequenceItem {
+                        var s = levelKeys[indent] ?? Set<String>()
+                        s.insert(key)
+                        levelKeys[indent] = s
+                    }
                 }
             }
         }

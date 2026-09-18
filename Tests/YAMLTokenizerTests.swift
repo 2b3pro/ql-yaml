@@ -47,6 +47,16 @@ struct TestRunner {
         assert(diags4.contains { $0.message.contains("Duplicate key") }, "Expected duplicate key warning")
         print("✅ Test 4 Passed: Duplicate key warning detected")
         
+        // Test 4b: Sequence items with identical keys must NOT be flagged as duplicates
+        let yamlSeqItems = """
+        sources:
+          - path: YAMLPreviewExtension
+          - path: Shared
+        """
+        let diags4b = validator.validate(yamlSeqItems)
+        assert(diags4b.isEmpty, "Sequence items with identical keys must not be flagged as duplicates, got: \(diags4b)")
+        print("✅ Test 4b Passed: Sequence items with identical keys correctly allowed")
+        
         // Test 5: Code folding hierarchy
         let yamlFolding = """
         app:
